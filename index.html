@@ -25,13 +25,8 @@
       position: fixed;
       inset: 0;
     }
-    
-     .app-shell {
-    #adminPanel {
-    width: calc(100% - 20px); /* Ocupa el ancho total menos un pequeño margen */
-    margin: 10px auto;
-    max-width: 100%; /* Elimina restricciones de píxeles fijos */
-    }
+
+    .app-shell { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 24px; }
     header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding: 8px 0; }
     h1 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.8rem); letter-spacing: 0.08em; text-transform: uppercase; color: var(--retro-blue); }
     .access-btn, .logout-btn, .button, .secondary { font-family: inherit; }
@@ -68,17 +63,11 @@
     .button:hover, .secondary:hover { opacity: 0.92; transform: translateY(-1px); }
 
     .feed-title { margin: 0 0 16px; font-size: 1.2rem; color:#5e92ce; letter-spacing: 0.08em; text-transform: uppercase; }
-    
-    .gallery, .feed-grid { display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; /* Tus 3 columnas */
-    gap: 8px; /* Espacio pequeño entre fotos para ganar tamaño */
-    width: 100%;
-    padding: 0; /* Eliminamos el padding interno */
-    }
+    .gallery, .feed-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 20px 0; }
 
-    .card {      width:100%;
+    .card {
       position: relative;
-      border-radius: 15px;
+      border-radius: 25px;
       background: #f1f6ff;
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -88,30 +77,35 @@
     }
     .card:hover { transform: translateY(-2px); box-shadow: 0 20px 60px rgba(41, 45, 83, 0.16); }
     .card-image {
-     width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+      width: 100%;
+      border-radius: 20px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      filter: none;
+      display: block;
     }
-    
+
     .card-body {
       padding: 12px 12px 16px;
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
-.card-title {
-      font-size: 0.85rem !important; /* Tamaño pequeño para que no se amontone */
-      font-weight: bold;
-      color: var(--dark-blue);
-      margin-top: 5px;
+    .card-title {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      text-align: left;
+      line-height: 1.25;
     }
     .card-date {
-      font-size: 0.7rem !important;
-      color: var(--muted);
+      margin: 0;
+      font-size: 0.78rem;
+      color: rgba(41, 45, 83, 0.62);
+      text-align: left;
     }
     .card-text { display: none; }
-
 
     /* BOTONES DE LA CARD (EDITAR/BORRAR): Ahora sólidos */
     .card-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; padding-bottom: 10px; padding-right: 10px; }
@@ -175,30 +169,15 @@
       text-align: left;
     }
 
-.entry-modal-title {
-      font-size: 1.4rem !important; /* Título grande y llamativo */
-      font-weight: 800;
-      color: #1a1a1a;
-      margin-bottom: 8px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Más estilo IG */
-    }
-.entry-modal-text {
-      font-size: 1rem !important; /* Tamaño estándar de lectura */
-      line-height: 1.5; /* Espaciado entre líneas para que no canse la vista */
-      color: #333;
-      text-align: left;
-      margin-top: 10px;
-      font-family: 'Segoe UI', Roboto, sans-serif;
+    .entry-modal-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; color: #292D53; }
+    .entry-modal-text {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #444;
       white-space: pre-wrap;
       margin: 0;
     }
-.entry-modal-date {
-      font-size: 0.8rem !important;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #8e8e8e;
-      margin-top: 15px;
-    }
+    .entry-modal-date { margin: 10px 0 0; font-size: 0.82rem; color: rgba(41, 45, 83, 0.6); }
 
     .entry-modal-controls { display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; margin-top: 12px; }
     .entry-modal-btn { background: var(--retro-blue); color: var(--vintage-cream); border: none; padding: 10px 16px; border-radius: 12px; cursor: pointer; font-size: 0.92rem; transition: background 0.2s ease; }
@@ -249,29 +228,27 @@
       </div>
     </div>
 
-    <section class="panel" id="adminPanel">
-      <h2>NUEVA ENTRADA</h2>
-      
-      <div class="compact-form-row">
-        <div class="file-zone">
-          <label for="imageInput" class="custom-file-upload">
-            
-          </label>
-          <input type="file" id="imageInput" multiple accept="image/*" onchange="actualizarContadorFotos()">
-          <span id="fileCount" class="file-count">0/5</span>
-        </div>
-        
-        <input type="text" id="titleInput" placeholder="Título corto...">
-      </div>
-
+    <section class="panel hidden" id="adminPanel">
+      <h2>Panel de administración</h2>
       <div class="field-group">
-        <textarea id="textInput" placeholder="Escribe tu entrada..."></textarea>
+        <label>
+          Imagen
+          <input type="file" id="imageInput" multiple accept="image/*" />
+        </label>
+        <label>
+          Título corto
+          <input type="text" id="titleInput" placeholder="Ej. Caminata en el bosque" />
+        </label>
+        <label>
+          Texto largo
+          <textarea id="textInput" placeholder="Escribe tu entrada..." spellcheck="true"></textarea>
+        </label>
       </div>
-
       <div class="action-row">
-        <button class="button" onclick="subirPublicacion()" id="publishBtn">PUBLICAR</button>
+        <button class="button" id="publishBtn">Publicar</button>
         <button class="secondary hidden" id="cancelEditBtn">Cancelar edición</button>
       </div>
+      <p class="hint">modo editor.</p>
     </section>
 
     <section>
@@ -282,25 +259,20 @@
   </div>
 
   <!-- Modal Expandido para Ver Entrada Completa -->
- <div class="entry-modal" id="entryModal">
-  <div class="entry-modal-content">
-    <button class="entry-modal-close" onclick="closeEntryModal()">&times;</button>
-    
-    <img class="entry-modal-image" id="modalImage" src="" alt="Imagen de la entrada">
-    
-    <div class="entry-modal-gallery" id="modalGallery"></div>
-    
-    <div class="entry-modal-info">
-      <h2 class="entry-modal-title" id="modalTitle"></h2>
-      
-      <p class="entry-modal-text" id="modalText"></p>
-      
-      <p class="entry-modal-date" id="modalDate"></p>
+  <div class="entry-modal" id="entryModal">
+    <div class="entry-modal-content">
+      <button class="entry-modal-close" onclick="closeEntryModal()">×</button>
+      <img class="entry-modal-image" id="modalImage" src="" alt="Imagen de la entrada" />
+     
+      <div class="entry-modal-gallery" id="modalGallery"></div>
+      <div class="entry-modal-info">
+        <h2 class="entry-modal-title" id="modalTitle"></h2>
+        <p class="entry-modal-text" id="modalText"></p>
+        <p class="entry-modal-date" id="modalDate"></p>
+      </div>
+      <div class="entry-modal-controls" id="modalControls"></div>
     </div>
-    
-    <div class="entry-modal-controls" id="modalControls"></div>
   </div>
-</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.35.0/dist/umd/supabase.min.js"></script>
   <script>
@@ -866,22 +838,6 @@
 
     initAuth();
     loadEntries();
-
-    function actualizarContadorFotos() {
-      const fileCountEl = document.getElementById('fileCount');
-      if (!fileCountEl) return;
-
-      const max = 5;
-      const count = (imageInput?.files?.length ?? 0);
-      fileCountEl.textContent = `${count}/${max}`;
-
-      if (count > max) {
-        alert(`Máximo ${max} fotos`);
-      }
-
-      // Si está en modo edición (sin nuevas imágenes), mostramos el contador según el input actual.
-      // SubirPublicacion vuelve a validar.
-    }
 
     function resetForm() {
     // Limpia los inputs de texto
