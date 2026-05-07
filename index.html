@@ -26,13 +26,12 @@
       inset: 0;
     }
     
-    .app-shell {
+     .app-shell {
     #adminPanel {
     width: calc(100% - 20px); /* Ocupa el ancho total menos un pequeño margen */
     margin: 10px auto;
     max-width: 100%; /* Elimina restricciones de píxeles fijos */
     }
-    
     header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding: 8px 0; }
     h1 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.8rem); letter-spacing: 0.08em; text-transform: uppercase; color: var(--retro-blue); }
     .access-btn, .logout-btn, .button, .secondary { font-family: inherit; }
@@ -77,8 +76,7 @@
     padding: 0; /* Eliminamos el padding interno */
     }
 
-    .card {
-      width:100%;
+    .card {      width:100%;
       position: relative;
       border-radius: 15px;
       background: #f1f6ff;
@@ -95,6 +93,7 @@
     aspect-ratio: 1 / 1;
     object-fit: cover;
     }
+    
     .card-body {
       padding: 12px 12px 16px;
       display: flex;
@@ -256,6 +255,7 @@
       <div class="compact-form-row">
         <div class="file-zone">
           <label for="imageInput" class="custom-file-upload">
+            
           </label>
           <input type="file" id="imageInput" multiple accept="image/*" onchange="actualizarContadorFotos()">
           <span id="fileCount" class="file-count">0/5</span>
@@ -282,7 +282,7 @@
   </div>
 
   <!-- Modal Expandido para Ver Entrada Completa -->
-<div class="entry-modal" id="entryModal">
+ <div class="entry-modal" id="entryModal">
   <div class="entry-modal-content">
     <button class="entry-modal-close" onclick="closeEntryModal()">&times;</button>
     
@@ -301,6 +301,7 @@
     <div class="entry-modal-controls" id="modalControls"></div>
   </div>
 </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.35.0/dist/umd/supabase.min.js"></script>
   <script>
     // Correo que tiene privilegios de administración.
