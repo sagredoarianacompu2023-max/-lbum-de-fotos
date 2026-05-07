@@ -26,7 +26,13 @@
       inset: 0;
     }
     
-    .app-shell { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding: 12px; }
+    .app-shell {
+    #adminPanel {
+    width: calc(100% - 20px); /* Ocupa el ancho total menos un pequeño margen */
+    margin: 10px auto;
+    max-width: 100%; /* Elimina restricciones de píxeles fijos */
+    }
+    
     header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding: 8px 0; }
     h1 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.8rem); letter-spacing: 0.08em; text-transform: uppercase; color: var(--retro-blue); }
     .access-btn, .logout-btn, .button, .secondary { font-family: inherit; }
@@ -63,11 +69,18 @@
     .button:hover, .secondary:hover { opacity: 0.92; transform: translateY(-1px); }
 
     .feed-title { margin: 0 0 16px; font-size: 1.2rem; color:#5e92ce; letter-spacing: 0.08em; text-transform: uppercase; }
-    .gallery, .feed-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 20px 0; }
+    
+    .gallery, .feed-grid { display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* Tus 3 columnas */
+    gap: 8px; /* Espacio pequeño entre fotos para ganar tamaño */
+    width: 100%;
+    padding: 0; /* Eliminamos el padding interno */
+    }
 
     .card {
+      width:100%;
       position: relative;
-      border-radius: 25px;
+      border-radius: 15px;
       background: #f1f6ff;
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -77,14 +90,11 @@
     }
     .card:hover { transform: translateY(-2px); box-shadow: 0 20px 60px rgba(41, 45, 83, 0.16); }
     .card-image {
-      width: 100%;
-      border-radius: 20px;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      filter: none;
-      display: block;
+     width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     }
-
     .card-body {
       padding: 12px 12px 16px;
       display: flex;
@@ -246,7 +256,6 @@
       <div class="compact-form-row">
         <div class="file-zone">
           <label for="imageInput" class="custom-file-upload">
-            
           </label>
           <input type="file" id="imageInput" multiple accept="image/*" onchange="actualizarContadorFotos()">
           <span id="fileCount" class="file-count">0/5</span>
