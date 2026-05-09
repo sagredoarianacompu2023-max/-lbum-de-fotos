@@ -91,21 +91,18 @@
       flex-direction: column;
       gap: 4px;
     }
-    .card-title {
-      margin: 0;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-      text-align: left;
-      line-height: 1.25;
+.card-title {
+      font-size: 0.85rem !important; /* Tamaño pequeño para que no se amontone */
+      font-weight: bold;
+      color: var(--dark-blue);
+      margin-top: 5px;
     }
     .card-date {
-      margin: 0;
-      font-size: 0.78rem;
-      color: rgba(41, 45, 83, 0.62);
-      text-align: left;
+      font-size: 0.7rem !important;
+      color: var(--muted);
     }
     .card-text { display: none; }
+
 
     /* BOTONES DE LA CARD (EDITAR/BORRAR): Ahora sólidos */
     .card-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; padding-bottom: 10px; padding-right: 10px; }
@@ -169,15 +166,30 @@
       text-align: left;
     }
 
-    .entry-modal-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; color: #292D53; }
-    .entry-modal-text {
-      font-size: 0.95rem;
-      line-height: 1.4;
-      color: #444;
+.entry-modal-title {
+      font-size: 1.4rem !important; /* Título grande y llamativo */
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Más estilo IG */
+    }
+.entry-modal-text {
+      font-size: 1rem !important; /* Tamaño estándar de lectura */
+      line-height: 1.5; /* Espaciado entre líneas para que no canse la vista */
+      color: #333;
+      text-align: left;
+      margin-top: 10px;
+      font-family: 'Segoe UI', Roboto, sans-serif;
       white-space: pre-wrap;
       margin: 0;
     }
-    .entry-modal-date { margin: 10px 0 0; font-size: 0.82rem; color: rgba(41, 45, 83, 0.6); }
+.entry-modal-date {
+      font-size: 0.8rem !important;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8e8e8e;
+      margin-top: 15px;
+    }
 
     .entry-modal-controls { display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; margin-top: 12px; }
     .entry-modal-btn { background: var(--retro-blue); color: var(--vintage-cream); border: none; padding: 10px 16px; border-radius: 12px; cursor: pointer; font-size: 0.92rem; transition: background 0.2s ease; }
@@ -864,4 +876,5 @@
 }
   </script>
 </body>
-</html>
+</html> 
+ 
